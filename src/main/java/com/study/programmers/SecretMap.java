@@ -17,23 +17,20 @@ public class SecretMap {
 
     public static String[] solution(int n, int[] arr1, int[] arr2) {
         String[] answer = {};
-        String[] newArr1 = new String[n];
+        String[] binaryArr = new String[n];
 
-        for(int i = 0; i < arr1.length; i++){
-            String binary1 = Long.toBinaryString(arr1[i]);
-            String binary2 = Long.toBinaryString(arr2[i]);
-            String result1 = binary1.length() == n? binary1 : "0".repeat(n-binary1.length())+binary1 ;
-            String result2 = binary2.length() == n? binary2 : "0".repeat(n-binary2.length())+binary2 ;
-            String sumNums = String.valueOf(Long.parseLong(result1)+Long.parseLong(result2));
-            newArr1[i] = sumNums.length() != n ? "0".repeat(n-sumNums.length())+sumNums : sumNums;
+        for(int i = 0; i < n; i++){
+            String binary1 = Long.toBinaryString(arr1[i] | arr2[i]);
+            binaryArr[i]  = binary1.length() == n? binary1 : "0".repeat(n-binary1.length())+binary1 ;
         }
 
         answer = new String[n];
+
         for(int i = 0; i < n ; i++){
-            char[] chars = newArr1[i].toCharArray();
+            char[] chars = binaryArr[i].toCharArray();
             char[] newChars = new char[chars.length];
             for(int j = 0; j < chars.length; j++){
-                newChars[j] = chars[j]== '0'? ' ': '#';
+                newChars[j] = chars[j] == '0'? ' ': '#';
             }
 
             answer[i] = String.valueOf(newChars);
