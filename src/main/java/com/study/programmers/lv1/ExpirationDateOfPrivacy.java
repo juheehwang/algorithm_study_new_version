@@ -33,7 +33,7 @@ public class ExpirationDateOfPrivacy {
         for(int i = 0; i<privacies.length;i++){
             String[] item = privacies[i].split(" ");
             LocalDate compare = LocalDate.parse(item[0].replace(".","-"));
-            if(date.isAfter(compare.plusMonths(termsMap.get(item[1])))|| date.isEqual(compare.plusMonths(termsMap.get()))){
+            if(!date.isBefore(compare.plusMonths(termsMap.get(item[1])))){
                 count++;
                 answer[i]= i+1;
             }
